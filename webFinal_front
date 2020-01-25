@@ -1,0 +1,418 @@
+COurse COde
+
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="booststrap.css">
+     <link rel="stylesheet" href="jquery.js">
+	 <title>Student Course Registration</title>
+</head>
+
+<body>
+<script>
+         $("submit").click(function(){
+    alert("data added Successfully.");
+    });
+    </script>
+	<script type="text/javascript">
+ 
+ $(document).ready(function () {  
+             $("Submit").click(function () {  
+                 var course = new Object();  
+                 course.Course_ID = $('#courseid').val();  
+                 course.Course_Code = $('#coursecode').val(); 
+				 course.Course_Name = $('#coursename').val();
+				 course.Credit_Hours = $('#credithours').val();
+				 
+				 
+				 $scope.AddCourse = function(){
+				 if(!$scope.coursename.match("^[a-zA-Z]*[a-zA-Z]*")){
+				 return console.error("Invalid Course Name Format");
+				 }
+				 if($scope.credithours < 1 || $.credithours > 3){
+				 return console.error("Invalid Credit Hours");
+				 }
+                 $.http({  
+                     url: 'http://localhost:2500/api/Courses',  
+                     type: 'POST',  
+                     dataType: 'json',  
+                     data: "{coursename: '" + $scope.coursename + "',coursecode: '" + $scope.coursecode + "',credithours: '" + $scope.credithours + "'}", 
+                     success: function (data,Status) {  
+                          LoadAddCourseData(); 
+						  
+                     },
+				 $scope.GetCourse = function(){
+				 if(!$scope.coursename.match("^[a-zA-Z]*[a-zA-Z]*")){
+				 return console.error("Invalid Course Name Format");
+				 }
+				 if($scope.credithours < 1 || $.credithours > 3){
+				 return console.error("Invalid Credit Hours");
+				 }
+                 $.http({  
+                     url: 'http://localhost:2500/api/Courses',  
+                     type: 'GET',  
+                     dataType: 'json',  
+                     data: "{coursename: '" + $scope.coursename + "',coursecode: '" + $scope.coursecode + "',credithours: '" + $scope.credithours + "'}", 
+                     success: function (data,Status) {  
+                          LoadGetCourseData(); 
+						  
+                     },
+				 $scope.EditCourse = function(){
+				 if(!$scope.coursename.match("^[a-zA-Z]*[a-zA-Z]*")){
+				 return console.error("Invalid Course Name Format");
+				 }
+				 if(parseInt($scope.credithours) < 1 || parseInt($.credithours) > 3){
+				 return console.error("Invalid Credit Hours");
+				 }
+                 $.http({  
+                     url: 'http://localhost:2500/api/Courses',  
+                     type: 'PUT',  
+                     dataType: 'json',  
+                     data: "{coursename: '" + $scope.coursename + "',coursecode: '" + $scope.coursecode + "',credithours: '" + $scope.credithours + "'}", 
+                     success: function (data,Status) {  
+                          LoadEditCourseData(); 
+						  
+                     },
+
+                 $scope.DeleteCourse = function(){
+				 if(!$scope.coursename.match("^[a-zA-Z]*[a-zA-Z]*")){
+				 return console.error("Invalid Course Name Format");
+				 }
+				 if(parseInt($scope.credithours) < 1 || parseInt($.credithours) > 3){
+				 return console.error("Invalid Credit Hours");
+				 }
+                 $.http({  
+                     url: 'http://localhost:2500/api/Courses',  
+                     type: 'DELETE',  
+                     dataType: 'json',  
+                     data: "{coursename: '" + $scope.coursename + "',coursecode: '" + $scope.coursecode + "',credithours: '" + $scope.credithours + "'}", 
+                     success: function (data,Status) {  
+                          LoadDeleteCourseData(); 
+						  
+                     },					 
+                 });  
+             });  
+         });  
+ </script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="nav-link" href=" C:\Users\hp pc\Desktop\Project\Course.html">Course</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="C:\Users\hp pc\Desktop\Project\Student.html""> Student<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" C:\Users\hp pc\Desktop\Project\Register Course.html">Course Registration</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+  <br />
+            <br />
+            <br />
+			<h1>Course Registration</h1>
+         			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Course ID:</label>
+                 <input type="text" class="form-control" id="courseid" >
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Course Code:</label>
+                 <input type="text" class="form-control" id="coursecode">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Course Name:</label>
+                 <input type="text" class="form-control" id="coursename">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Credit Hours:</label>
+                 <input type="text" class="form-control" id="credithours">
+            </div>
+			
+            <p>
+                <button type="button" class="btn btn-primary">Submit</button>
+
+            </p>
+		 <br><br> 
+
+
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+
+
+REgistreation Course Code
+
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="booststrap.css">
+     <link rel="stylesheet" href="jquery.js">
+	 <title>Student Course Registration</title>
+</head>
+
+<body>
+<script>
+         $("submit").click(function(){
+    alert("data added Successfully.");
+    });
+    </script>
+	
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="nav-link" href=" C:\Users\hp pc\Desktop\Project\Course.html"">Course</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="C:\Users\hp pc\Desktop\Project\Student.html"> Student<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" C:\Users\hp pc\Desktop\Project\Register Course.html">Course Registration</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+  <br />
+            <br />
+            <br />
+			<h1>Student Register Course</h1>
+         			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Course Registration ID:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Course ID:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Student ID:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Registration Time:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+            <p>
+                <button type="button" class="btn btn-primary">Submit</button>
+
+            </p>
+
+
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Student Reg No</th>
+      <th scope="col">Student Name</th>
+      <th scope="col">Course Code</th>
+	  <th scope="col">Course Name</th>
+	  <th scope="col">Registration Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">1</th>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+       <tr class="table-active">
+      <th scope="row">2</th>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	    <tr class="table-active">
+      <th scope="row">3</th>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	
+  </tbody>
+</table> 
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+
+
+Student Code
+
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="booststrap.css">
+     <link rel="stylesheet" href="jquery.js">
+	 <title>Student Course Registration</title>
+</head>
+
+<body>
+<script>
+         $("submit").click(function(){
+    alert("data added Successfully.");
+    });
+    </script>
+	
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="nav-link" href=" C:\Users\hp pc\Desktop\Project\Course.html"">Course</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="C:\Users\hp pc\Desktop\Project\Student.html"> Student<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" C:\Users\hp pc\Desktop\Project\Register Course.html">Course Registration</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+  <br />
+            <br />
+            <br />
+			<h1>Student Register Course</h1>
+         			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Course Registration ID:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Course ID:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Student ID:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+			<div class="form-group">
+                 <label class="col-form-label" for="inputDefault">Registration Time:</label>
+                 <input type="text" class="form-control" id="inputDefault">
+            </div>
+            <p>
+                <button type="button" class="btn btn-primary">Submit</button>
+
+            </p>
+
+
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Student Reg No</th>
+      <th scope="col">Student Name</th>
+      <th scope="col">Course Code</th>
+	  <th scope="col">Course Name</th>
+	  <th scope="col">Registration Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">1</th>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+       <tr class="table-active">
+      <th scope="row">2</th>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	    <tr class="table-active">
+      <th scope="row">3</th>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	
+  </tbody>
+</table> 
+    </div>
+
+
+</body>
+
+
+
+</html>
