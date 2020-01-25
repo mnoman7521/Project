@@ -1,0 +1,351 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
+using Final.Models;
+
+namespace Final.Controllers.api
+{
+    public class CourseRegistrationsController : ApiController
+    {
+        private CourseRegistrationSystemEntities db = new CourseRegistrationSystemEntities();
+
+        // GET: api/CourseRegistrations
+        public IQueryable<CourseRegistration> GetCourseRegistrations()
+        {
+            return db.CourseRegistrations;
+        }
+
+        // GET: api/CourseRegistrations/5
+        [ResponseType(typeof(CourseRegistration))]
+        public IHttpActionResult GetCourseRegistration(int id)
+        {
+            CourseRegistration courseRegistration = db.CourseRegistrations.Find(id);
+            if (courseRegistration == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(courseRegistration);
+        }
+
+        // PUT: api/CourseRegistrations/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCourseRegistration(int id, CourseRegistration courseRegistration)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != courseRegistration.CourseRegistrationId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(courseRegistration).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CourseRegistrationExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/CourseRegistrations
+        [ResponseType(typeof(CourseRegistration))]
+        public IHttpActionResult PostCourseRegistration(CourseRegistration courseRegistration)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.CourseRegistrations.Add(courseRegistration);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = courseRegistration.CourseRegistrationId }, courseRegistration);
+        }
+
+        // DELETE: api/CourseRegistrations/5
+        [ResponseType(typeof(CourseRegistration))]
+        public IHttpActionResult DeleteCourseRegistration(int id)
+        {
+            CourseRegistration courseRegistration = db.CourseRegistrations.Find(id);
+            if (courseRegistration == null)
+            {
+                return NotFound();
+            }
+
+            db.CourseRegistrations.Remove(courseRegistration);
+            db.SaveChanges();
+
+            return Ok(courseRegistration);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool CourseRegistrationExists(int id)
+        {
+            return db.CourseRegistrations.Count(e => e.CourseRegistrationId == id) > 0;
+        }
+    }
+}
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Web.Http;
+using System.Web.Http.Description;
+using Final.Models;
+
+namespace Final.Controllers.api
+{
+    public class CoursesController : ApiController
+    {
+        private CourseRegistrationSystemEntities db = new CourseRegistrationSystemEntities();
+
+        // GET: api/Courses
+        public IQueryable<Course> GetCourses()
+        {
+            return db.Courses;
+        }
+
+        // GET: api/Courses/5
+        [ResponseType(typeof(Course))]
+        public IHttpActionResult GetCourse(int id)
+        {
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(course);
+        }
+
+        // PUT: api/Courses/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCourse(int id, Course course)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != course.CourseId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(course).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CourseExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/Courses
+        [ResponseType(typeof(Course))]
+        public IHttpActionResult PostCourse(Course course)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Courses.Add(course);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = course.CourseId }, course);
+        }
+
+        // DELETE: api/Courses/5
+        [ResponseType(typeof(Course))]
+        public IHttpActionResult DeleteCourse(int id)
+        {
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            db.Courses.Remove(course);
+            db.SaveChanges();
+
+            return Ok(course);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool CourseExists(int id)
+        {
+            return db.Courses.Count(e => e.CourseId == id) > 0;
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
+using Final.Models;
+
+namespace Final.Controllers.api
+{
+    public class StudentsController : ApiController
+    {
+        private CourseRegistrationSystemEntities db = new CourseRegistrationSystemEntities();
+
+        // GET: api/Students
+        public IQueryable<Student> GetStudents()
+        {
+            return db.Students;
+        }
+
+        // GET: api/Students/5
+        [ResponseType(typeof(Student))]
+        public IHttpActionResult GetStudent(int id)
+        {
+            Student student = db.Students.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(student);
+        }
+
+        // PUT: api/Students/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutStudent(int id, Student student)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != student.StudentId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(student).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StudentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/Students
+        [ResponseType(typeof(Student))]
+        public IHttpActionResult PostStudent(Student student)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Students.Add(student);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = student.StudentId }, student);
+        }
+
+        // DELETE: api/Students/5
+        [ResponseType(typeof(Student))]
+        public IHttpActionResult DeleteStudent(int id)
+        {
+            Student student = db.Students.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            db.Students.Remove(student);
+            db.SaveChanges();
+
+            return Ok(student);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool StudentExists(int id)
+        {
+            return db.Students.Count(e => e.StudentId == id) > 0;
+        }
+    }
+}
